@@ -3,17 +3,15 @@ import path from 'path';
 
 export default async function handler(req, res) {
   try {
-    // 获取 URL 查询参数，假设参数名为 "chineseText"
-    const { chineseText } = req.query;
+    const { Text } = req.query;
 
-    // 如果有中文参数，将其转换为 utf-8 编码
-    const utf8ChineseText = chineseText ? Buffer.from(chineseText).toString('utf-8') : '';
+    const utf8Text = Text ? Buffer.from(Text).toString('utf-8') : '';
 
-    // 定义 Python 脚本的路径
     const pythonScriptPath = path.join(process.cwd(), '../insert-text/main.py');
 
-    // 执行 Python 脚本，将中文参数传递给脚本
-    exec(`/Users/chenyiqiang/WorkSpace/insert-text/venv/bin/python ${pythonScriptPath} ${utf8ChineseText}`, (error, stdout, stderr) => {
+    const pythonBinPath = 'python3';
+
+    exec(`${pythonBinPath} ${pythonScriptPath} ${utf8Text}`, (error, stdout, stderr) => {
       if (error) {
         console.error(`Error executing Python script: ${error}`);
         res.status(500).json({ error: 'Internal Server Error' });

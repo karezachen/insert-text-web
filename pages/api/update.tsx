@@ -1,13 +1,37 @@
 import { exec } from 'child_process';
 import path from 'path';
 
-export default async function handler(req, res) {
+export default async function handler(req: any, res: any) {
+
+  const countChineseCharacters = (text: string) => {
+    const chineseRegex = /[\u4e00-\u9fa5]/g;
+    const chineseMatches = text.match(chineseRegex);
+    return chineseMatches ? chineseMatches.length : 0;
+  };
+
   try {
     const { Text } = req.query;
 
     const utf8Text = Text ? Buffer.from(Text).toString('utf-8') : '';
 
-    const pythonScriptPath = path.join(process.cwd(), '../insert-text/main.py');
+    let pythonScriptPath = path.join(process.cwd(), '../insert-text/main.py');
+
+    console.log(`pythonScriptPath type: ${typeof pythonScriptPath}, value: ${pythonScriptPath}`);
+
+    const chineseCharacterCount = countChineseCharacters(utf8Text);
+
+    console.log(`chineseCharacterCount type: ${typeof chineseCharacterCount}, value: ${chineseCharacterCount}`);
+
+    console.log(`2 type: ${typeof 2}, value: ${2}`);
+
+    if (chineseCharacterCount === 2) {
+      pythonScriptPath = path.join(process.cwd(), '../insert-text/two_words.py');
+      console.log(`pythonScriptPath type: ${typeof pythonScriptPath}, value: ${pythonScriptPath}`);
+    } else {
+      console.log(`chineseCharacterCount ${chineseCharacterCount} un equal 2`);
+    }
+
+    console.log(`pythonScriptPath type: ${typeof pythonScriptPath}, value: ${pythonScriptPath}`);
 
     const pythonBinPath = 'python3';
 

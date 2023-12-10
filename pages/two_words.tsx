@@ -48,7 +48,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
       </div>
       {images.map((image, index) => (
         <div key={index} className="gallery-item">
-          <img key={index} src={`/output/${image}`} alt={`Image ${index}`} className="gallery-image" />
+          <img key={index} src={`/two_words_output/${image}`} alt={`Image ${index}`} className="gallery-image" />
           <p className="image-index">款式 {index + 1} </p>
         </div>
       ))}
@@ -95,7 +95,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
 };
 
 export const getStaticProps: GetStaticProps<GalleryProps> = async () => {
-  const directory = path.join(process.cwd(), 'public', 'output');
+  const directory = path.join(process.cwd(), 'public', 'two_words_output');
   const filenames = fs.readdirSync(directory);
 
   return {

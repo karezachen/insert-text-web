@@ -20,6 +20,8 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
 
       if (chineseCharacterCount == 2) {
         window.location.href = 'two_words';
+      } else if (chineseCharacterCount == 3) {
+        window.location.href = 'third_words';
       } else {
         window.location.href = 'gallery';
       }

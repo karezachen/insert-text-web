@@ -27,6 +27,8 @@ export default async function handler(req: any, res: any) {
     if (chineseCharacterCount === 2) {
       pythonScriptPath = path.join(process.cwd(), '../insert-text/two_words.py');
       console.log(`pythonScriptPath type: ${typeof pythonScriptPath}, value: ${pythonScriptPath}`);
+    } else if (chineseCharacterCount === 3) {
+      pythonScriptPath = path.join(process.cwd(), '../insert-text/third_words.py');
     } else {
       console.log(`chineseCharacterCount ${chineseCharacterCount} un equal 2`);
     }
